@@ -12,6 +12,20 @@ class App extends Component {
     userID: null
   };
 
+  onFacebookLogin = (loginStatus, resultObject) => {
+    console.log("onFacebookLogin");
+    if (loginStatus === true) {
+      console.log("onFacebookLogin: setState: user.name: " + resultObject.user.name);
+      console.log("onFacebookLogin: setState: userID: " + resultObject.user.id);
+      this.setState({
+        username: resultObject.user.name,
+        userID: resultObject.user.id
+      });
+    } else {
+      alert("Facebook login error");
+    }
+  }
+
   render() {
     return (
       <Router>
