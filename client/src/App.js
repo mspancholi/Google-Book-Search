@@ -37,9 +37,9 @@ class App extends Component {
           <br></br>
           <br></br>
           <Switch>
-            <Route exact path="/" component={Books} />
-            <Route exact path="/books" component={Books} />
-            <Route exact path="/search" component={Search} />
+            <Route exact path="/" render={(props) => <Books {...props} userID={this.state.userID} />} />
+            <Route exact path="/books" render={(props) => <Books {...props} userID={this.state.userID} />} />
+            <Route exact path="/search" render={(props) => <Search {...props} userID={this.state.userID} />} />
             <Route component={NoMatch} />
           </Switch>
         </div>

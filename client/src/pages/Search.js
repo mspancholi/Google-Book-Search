@@ -3,7 +3,6 @@ import ActionBtn from "../components/ActionBtn";
 import Img from "../components/Img";
 import dbAPI from "../utils/dbAPI";
 import searchAPI from "../utils/searchAPI";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
@@ -35,23 +34,29 @@ class Search extends Component {
     }
 
     saveBook = book => {
-        dbAPI.saveBook({
-            login: this.props.userID,
-            title: book.volumeInfo.title,
-            authors: book.volumeInfo.authors,
-            description: book.volumeInfo.description,
-            image: book.volumeInfo.imageLinks.smallThumbnail,
-            link: book.volumeInfo.infoLink,
-            googleId: book.id
-        })
-            .then(res => {
-                console.log("saved book");
-                alert("saved");
+        if (this.props.userID) {
+            dbAPI.saveBook({
+                login: this.props.userID,
+                title: book.volumeInfo.title,
+                authors: book.volumeInfo.authors,
+                description: book.volumeInfo.description,
+                image: book.volumeInfo.imageLinks.smallThumbnail,
+                link: book.volumeInfo.infoLink,
+                googleId: book.id
             })
-            .catch(err => {
-                console.log("saveBook:" + err);
-                alert("Book Not Saved");
-            });
+                .then(res => {
+                    console.log("saved book");
+                    alert("saved");
+                })
+                .catch(err => {
+                    console.log("saveBook:" + err);
+                    alert("Book Not Saved: " + err);
+                });
+        }
+        else {
+            console.log("saveBook: Need to Login first");
+            alert("Please login before saving");
+        }
     };
 
     handleInputChange = event => {
@@ -103,11 +108,9 @@ class Search extends Component {
                             <List>
                                 {this.state.booksAPI.map(book => (
                                     <ListItem key={book.id}>
-                                        <Link to={"/books/" + book.id}>
-                                            <strong>
-                                                <a href={book.volumeInfo.link}>{book.volumeInfo.title}</a>
-                                            </strong>
-                                        </Link>
+                                        <strong>
+                                            <a href={book.volumeInfo.link}>{book.volumeInfo.title}</a>
+                                        </strong>
                                         <ActionBtn btn_text="Save" onClick={() => this.saveBook(book)} />
 
                                         <Row>
