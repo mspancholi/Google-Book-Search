@@ -1,0 +1,22 @@
+/*.navbar navbar-expand-lg navbar-light { background-color: blue;
+color: red;
+
+}
+
+/* navbar 
+.navbar navbar-expand-lg navbar-light {
+    background-color: blue;
+    border-color: yellow;
+}*/
+
+
+.navbar {
+    background-color: rgb(52, 52, 158);
+    color: white
+    
+}
+
+.nav-link {
+    color: red;
+
+}
