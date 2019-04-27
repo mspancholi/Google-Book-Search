@@ -17,7 +17,8 @@ class FacebookLogin extends Component {
     initializeFacebookLogin = () => {
         console.log("initializeFacebookLogin");
         this.FB = window.FB;
-        this.checkLoginStatus();
+        //this.checkLoginStatus();
+        this.FB.getLoginStatus(this.facebookLoginHandler);
     }
 
     /**
