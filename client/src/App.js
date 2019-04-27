@@ -22,7 +22,8 @@ class App extends Component {
         userID: resultObject.user.id
       });
     } else {
-      alert("Facebook login error");
+      //alert("Facebook login error");
+      console.log("Facebook login error");
     }
   }
 
