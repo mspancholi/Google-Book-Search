@@ -18,7 +18,7 @@ class FacebookLogin extends Component {
         console.log("initializeFacebookLogin");
         this.FB = window.FB;
         //this.checkLoginStatus();
-        this.FB.getLoginStatus(this.facebookLoginHandler);
+        this.FB.Event.subscribe("auth.statusChange", this.checkLoginStatus);
     }
 
     /**
